@@ -12,176 +12,153 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-ZL4CMBVD57');
 </script>
+
 <style>
-/* ==================== 팝업 공지 스타일 ==================== */
-.notice-popup {
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  display:flex; justify-content:center; align-items:flex-start;
-  padding-top:120px;
-  backdrop-filter:blur(6px);
-  background:rgba(0,0,0,0.45);
-  z-index:5000; opacity:0; pointer-events:none;
-  transition:opacity .45s ease;
-}
-.notice-popup.show { opacity:1; pointer-events:auto; }
-.notice-popup.hide { opacity:0; pointer-events:none; }
-
-.notice-box {
-  width:350px; background:white; border-radius:18px;
-  padding:28px 22px; text-align:center;
-  animation:popupFade .45s ease;
-  box-shadow:0 12px 38px rgba(0,0,0,0.30);
-}
-.notice-icon { font-size:42px; margin-bottom:10px; }
-.notice-title { font-size:22px; font-weight:800; margin-bottom:8px; }
-.notice-msg { font-size:15px; color:#333; line-height:1.45; margin-bottom:22px; }
-
-.notice-btn-wrap { display:flex; justify-content:center; gap:10px; margin-top:10px; }
-.notice-btn {
-  padding:9px 18px; border-radius:22px; border:none; cursor:pointer;
-  font-size:14px; font-weight:700; transition:.3s;
-}
-
-.btn-close { background:#e0e0e0; }
-.btn-close:hover { background:#bdbdbd; }
-
-.btn-today { background:#4CAF50; color:white; }
-.btn-today:hover { background:#2e7d32; transform:translateY(-1px); }
-
-/* 타입 테마 */
-.notice-box.info { border-top:6px solid #4CAF50; }
-.notice-box.warning { border-top:6px solid #ff9800; }
-.notice-box.danger { border-top:6px solid #e53935; }
-
-@keyframes popupFade {
-  from { transform:translateY(25px); opacity:0; }
-  to { transform:translateY(0); opacity:1; }
-}
-/* ==================== 팝업 스타일 종료 ==================== */
-
+/* ==================== 전역 스타일 ==================== */
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:"Pretendard", Arial; background:#f5f7fb; overflow-x:hidden; scroll-behavior:smooth; }
 
-/* HEADER */
+/* ==================== 팝업 스타일 ==================== */
+.notice-popup {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  display:flex; justify-content:center; align-items:flex-start;
+  padding-top:120px; backdrop-filter:blur(6px); background:rgba(0,0,0,0.45);
+  z-index:5000; opacity:0; pointer-events:none; transition:opacity .45s ease;
+}
+.notice-popup.show { opacity:1; pointer-events:auto; }
+.notice-box {
+  width:350px; background:white; border-radius:18px; padding:28px 22px; text-align:center;
+  animation:popupFade .45s ease; box-shadow:0 12px 38px rgba(0,0,0,0.30);
+}
+.notice-box.info { border-top:6px solid #4CAF50; }
+.notice-box.warning { border-top:6px solid #ff9800; }
+.notice-box.danger { border-top:6px solid #e53935; }
+.notice-icon { font-size:42px; margin-bottom:10px; }
+.notice-title { font-size:22px; font-weight:800; margin-bottom:8px; }
+.notice-msg { font-size:15px; color:#333; line-height:1.45; margin-bottom:22px; }
+.notice-btn-wrap { display:flex; justify-content:center; gap:10px; }
+.notice-btn { padding:9px 18px; border-radius:22px; border:none; cursor:pointer; font-size:14px; font-weight:700; transition:.3s; }
+.btn-close { background:#e0e0e0; }
+.btn-today { background:#4CAF50; color:white; }
+@keyframes popupFade { from { transform:translateY(25px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+
+/* ==================== 헤더 ==================== */
 header {
-  position:fixed; top:0; left:0; width:100%;
-  background:rgba(255,255,255,0.9); backdrop-filter:blur(10px);
-  padding:15px 30px; display:flex; justify-content:space-between; align-items:center;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1); z-index:1000;
+  position:fixed; top:0; left:0; width:100%; background:rgba(255,255,255,0.9);
+  backdrop-filter:blur(10px); padding:15px 30px; display:flex; justify-content:space-between;
+  align-items:center; box-shadow:0 2px 6px rgba(0,0,0,0.1); z-index:1000;
 }
 nav ul { display:flex; gap:25px; list-style:none; font-weight:600; }
 nav a { text-decoration:none; color:#222; cursor:pointer; transition:.3s; }
 nav a:hover { color:#4CAF50; transform:translateY(-2px); }
 header img { width:50px; border-radius:50%; cursor:pointer; }
 
-/* Scroll margin */
-#hero, #updates, #sites, #extensions { scroll-margin-top:140px; }
-
-/* HERO */
-.hero {
-  height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
-  position:relative; overflow:hidden; text-align:center; color:white;
+/* ==================== 히어로 슬라이더 ==================== */
+.hero { height:100vh; position:relative; overflow:hidden; }
+.hero-track {
+  display:flex; 
+  width:300%; 
+  height:100%;
+  transform: translateX(0);
 }
+.hero-slide { 
+  width:33.3333%; 
+  height:100%; 
+  display:flex; flex-direction:column; justify-content:center; align-items:center; 
+  text-align:center; color:white; position:relative; 
+}
+
 .hero-video-wrapper { position:absolute; top:0; left:0; width:100%; height:100%; z-index:-2; }
-.hero-video { width:100%; height:100%; object-fit:cover; filter:brightness(60%); }
-.hero-overlay {
-  position:absolute; top:0; left:0; width:100%; height:100%;
-  background:linear-gradient(135deg, rgba(76,175,80,0.7), rgba(46,125,50,0.7)); z-index:-1;
-}
-.hero h1 { font-size:42px; font-weight:800; margin-top:-60px; }
-.hero p { margin-top:15px; font-size:18px; }
+.hero-video { width:100%; height:100%; object-fit:cover; filter:brightness(50%); }
+.hero-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, rgba(76, 175, 80, 0.7), rgba(46, 125, 50, 0.7)); z-index:-1; }
 
-/* HERO ICON CARDS */
-.hero-icons {
-  display:flex; gap:25px; margin-top:40px;
-  opacity:0; transform:translateY(25px);
-  transition:opacity 1s ease, transform 1s ease;
+.hero-dots {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 12px; z-index: 10;
 }
+.dot {
+  width: 12px; height: 12px; background: rgba(255,255,255,0.4);
+  border-radius: 50%; cursor: pointer; transition: 0.3s;
+}
+.dot.active { background: #fff; transform: scale(1.2); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+.hero h1 { font-size:42px; font-weight:800; margin-bottom:10px; }
+.hero-icons { display:flex; gap:25px; margin-top:40px; opacity:0; transform:translateY(25px); transition:1s ease; }
 .hero-icons.show { opacity:1; transform:translateY(0); }
 
 .icon-card {
-  background:rgba(255,255,255,0.18); backdrop-filter:blur(8px);
-  padding:18px 22px; border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.25);
-  display:flex; flex-direction:column; align-items:center; cursor:pointer;
-  transition:transform .25s ease, box-shadow .25s ease, opacity .6s ease;
-  border:1px solid rgba(255,255,255,0.3); opacity:0;
+  background:rgba(255,255,255,0.18); backdrop-filter:blur(8px); padding:18px 22px; border-radius:20px;
+  border:1px solid rgba(255,255,255,0.3); display:flex; flex-direction:column; align-items:center; cursor:pointer; transition:.25s; opacity:0;
 }
 .icon-card.show { opacity:1; }
-.icon-card:hover { box-shadow:0 14px 32px rgba(0,255,120,0.4); }
+.icon-card:hover { box-shadow:0 14px 32px rgba(0,255,120,0.4); transform:scale(1.05); }
+.icon-card img { width:70px; height:70px; margin-bottom:10px; }
 
-/* ICON IMG */
-.hero .icon-card img {
-  width:70px; height:70px; margin-bottom:10px;
+.channel-profile { width:120px; height:120px; border-radius:50%; border:4px solid white; margin-bottom:20px; box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+.channel-title { font-size:48px; font-weight:800; margin-bottom:10px; }
+.channel-btn {
+  background:#ff0000; color:white; padding:12px 28px; border-radius:30px;
+  text-decoration:none; font-weight:700; font-size:18px; transition:0.3s; margin-top:20px;
 }
-.icon-card span { font-size:15px; font-weight:600; color:#fff; }
+.channel-btn:hover { background:white; color:#ff0000; transform:scale(1.1); }
 
-.hero-subtitle { margin-top:40px; font-size:24px; font-weight:700; }
+/* ==================== 섹션 타이틀 ==================== */
+.section-title { text-align:center; font-size:32px; margin:80px 0 30px; font-weight:700; color:#222; }
+#updates, #sites, #extensions { scroll-margin-top:100px; }
 
-/* TITLE */
-.section-title { text-align:center; font-size:32px; margin:60px 0 25px; font-weight:700; color:#222; }
-
-/* UPDATE TIMELINE */
-.update-timeline { max-width:800px; margin:auto; position:relative; padding-left:25px; border-left:3px solid #4CAF50; }
-.update-item { margin-bottom:25px; padding-left:20px; position:relative; }
-.update-item::before {
-  content:""; position:absolute; left:-11px; top:5px;
-  width:14px; height:14px; background:#4CAF50; border-radius:50%; border:2px solid white;
+/* [수정] 업데이트 내역: 최대 3개, 한 줄에 1개씩 세로 정렬 */
+.update-timeline {
+  max-width: 650px; margin: auto; padding: 0 20px;
+  display: flex;
+  flex-direction: column; /* 세로 나열 */
+  gap: 15px;
 }
-.update-date { font-size:14px; font-weight:700; color:#2e7d32; }
-.update-desc { font-size:17px; font-weight:600; color:#222; }
+.update-item {
+  background: white; padding: 20px 25px; border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  display: flex; align-items: center; justify-content: space-between; /* 날짜와 내용 분리 */
+  transition: 0.3s;
+  border-left: 5px solid #4CAF50;
+}
+.update-item:hover { transform: translateX(8px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
 
-/* SITE LIST */
-.tab-menu { display:flex; justify-content:center; gap:15px; margin-bottom:20px; }
-.tab-button { background:white; border:1px solid #ddd; padding:8px 18px; border-radius:25px; cursor:pointer; font-weight:600; }
+.update-date { font-size:14px; font-weight:800; color:#2e7d32; min-width: 100px; }
+.update-desc { font-size:16px; font-weight:600; color:#333; flex: 1; text-align: right; }
+
+/* 서비스 목록 정렬 (중앙 정렬 유지) */
+.tab-menu { display:flex; justify-content:center; gap:15px; margin-bottom:30px; }
+.tab-button { background:white; border:1px solid #ddd; padding:8px 18px; border-radius:25px; cursor:pointer; font-weight:600; transition:.3s; }
 .tab-button.active { background:#4CAF50; color:white; border-color:#4CAF50; }
 
 .site-list {
   max-width:1000px; margin:auto; padding:0 20px;
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+  justify-content: center;
+  gap: 20px;
 }
 .site-card {
   display:flex; align-items:center; gap:15px; background:white;
   padding:18px; border-radius:15px; box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:.3s;
 }
 .site-card:hover { transform:translateY(-6px); }
+.site-logo { width:50px !important; height:50px !important; border-radius:10px; object-fit:contain; }
+.site-link { text-decoration:none; color:#4CAF50; font-weight:700; }
 
-/* FIX ICON SIZE */
-.site-logo {
-  width:45px !important;
-  height:45px !important;
-  object-fit:contain;
-  border-radius:10px;
-}
-
-/* LINK */
-.site-link { text-decoration:none; color:#4CAF50; font-weight:700; transition:.3s; }
-.site-link:hover { color:#2e7d32; }
-
-/* EXTENSIONS */
-.extension-section {
-  max-width:1000px; margin:60px auto; padding:0 20px;
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;
-}
-.extension-card {
-  background:white; padding:25px; border-radius:15px; text-align:center;
-  box-shadow:0 4px 12px rgba(0,0,0,.12); transition:.3s;
-}
-.extension-card:hover { transform:translateY(-6px); box-shadow:0 8px 18px rgba(0,0,0,.15); }
+.extension-section { max-width:1000px; margin:0 auto 80px; padding:0 20px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+.extension-card { background:white; padding:25px; border-radius:15px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,.12); transition:.3s; }
 .ext-title { font-size:20px; font-weight:700; margin-top:12px; }
 .ext-desc { margin:10px 0 15px; font-size:15px; color:#555; }
 .ext-btn { display:inline-block; background:#4CAF50; color:white; padding:8px 18px; border-radius:25px; font-weight:600; text-decoration:none; }
 
-footer { margin-top:80px; padding:18px; background:#111; color:#eee; text-align:center; font-size:12px; }
+footer { padding:30px; background:#111; color:#eee; text-align:center; font-size:13px; }
 </style>
 </head>
 
 <body>
 
-<!-- ==================== 팝업 HTML ==================== -->
 <div id="noticePopup" class="notice-popup" style="display:none;">
   <div id="noticeBox" class="notice-box info">
     <div id="noticeIcon" class="notice-icon">🛈</div>
@@ -195,8 +172,7 @@ footer { margin-top:80px; padding:18px; background:#111; color:#eee; text-align:
 </div>
 
 <header>
-  <img src="https://playentry.org/uploads/d3/c1/d3c110b4ma9imlt80006a2c94373oyaj.png"
-       onclick="location.href='https://playentry.org/profile/6583d1984a600d00255e78bc/project';">
+  <img src="https://playentry.org/uploads/d3/c1/d3c110b4ma9imlt80006a2c94373oyaj.png"  onclick="location.href='https://playentry.org/profile/6583d1984a600d00255e78bc/project';">
   <nav>
     <ul>
       <li><a class="nav-btn" data-target="hero">소개</a></li>
@@ -209,28 +185,47 @@ footer { margin-top:80px; padding:18px; background:#111; color:#eee; text-align:
 
 <section class="hero" id="hero">
   <div class="hero-video-wrapper">
-    <video autoplay muted loop playsinline class="hero-video">
-      <!-- <source src="video.mp4" type="video/mp4"> -->
-    </video>
+    <video autoplay muted loop playsinline class="hero-video"></video>
     <div class="hero-overlay"></div>
   </div>
 
-  <h1>꼬꼬마 웹</h1>
-  <p>웹 기반 종합 기능 제공</p>
+  <div class="hero-track" id="heroTrack">
+    <div class="hero-slide">
+      <img src="https://yt3.googleusercontent.com/lRPvRXvu4FpIKxzYbrwxeXZd9_Nx41ltmRGFSW1blaAsaBAYdEnYgrD2rQGQALfUJksUu08t_A=s160-c-k-c0x00ffffff-no-rj" class="channel-profile" alt="진격코">
+      <h2 class="channel-title">진격코 채널 출시!</h2>
+      <p style="font-size: 20px; opacity: 0.9;">코딩의 한계를 넘어서는 진격의 코딩 강의</p>
+      <a href="https://www.youtube.com/@진격의코딩" target="_blank" class="channel-btn">더 알아보기</a>
+    </div>
 
-  <div class="hero-icons">
-    <div class="icon-card tilt" data-category="study">
-      <img src="https://img.bloupla.net/flashcard-icon?raw=1"><span>영어 플래시카드</span>
+    <div class="hero-slide">
+      <h1>꼬꼬마 웹</h1>
+      <p style="font-size: 18px; margin-top: 5px;">웹 기반 종합 기능 제공</p>
+      <div class="hero-icons">
+        <div class="icon-card tilt" data-category="study">
+          <img src="https://img.bloupla.net/flashcard-icon?raw=1"><span>영어 플래시카드</span>
+        </div>
+        <div class="icon-card tilt" data-category="study">
+          <img src="https://img.bloupla.net/dream-namu-wiki-icon?raw=1"><span>꿈나무위키</span>
+        </div>
+        <div class="icon-card tilt" data-category="tool">
+          <img src="https://img.bloupla.net/9j1XSjUg?raw=1"><span>파일 용량 줄이기</span>
+        </div>
+      </div>
+      <h3 style="margin-top:30px; font-weight:700;">강력하고 유용한 기능들</h3>
     </div>
-    <div class="icon-card tilt" data-category="study">
-      <img src="https://img.bloupla.net/dream-namu-wiki-icon?raw=1"><span>꿈나무위키</span>
-    </div>
-    <div class="icon-card tilt" data-category="tool">
-      <img src="https://img.bloupla.net/9j1XSjUg?raw=1"><span>파일 용량 줄이기</span>
+
+    <div class="hero-slide">
+      <img src="https://yt3.googleusercontent.com/lRPvRXvu4FpIKxzYbrwxeXZd9_Nx41ltmRGFSW1blaAsaBAYdEnYgrD2rQGQALfUJksUu08t_A=s160-c-k-c0x00ffffff-no-rj" class="channel-profile">
+      <h2 class="channel-title">진격코 채널 출시!</h2>
+      <p style="font-size: 20px; opacity: 0.9;">코딩의 한계를 넘어서는 진격의 코딩 강의</p>
+      <a href="https://www.youtube.com/@진격의코딩" target="_blank" class="channel-btn">더 알아보기</a>
     </div>
   </div>
 
-  <h3 class="hero-subtitle">강력하고 유용한 기능들</h3>
+  <div class="hero-dots" id="heroDots">
+    <div class="dot active" data-index="0"></div>
+    <div class="dot" data-index="1"></div>
+  </div>
 </section>
 
 <h2 class="section-title" id="updates">업데이트 내역</h2>
@@ -247,80 +242,80 @@ footer { margin-top:80px; padding:18px; background:#111; color:#eee; text-align:
 
 <h2 class="section-title" id="extensions">대표 확장 프로그램</h2>
 <div class="extension-section">
-  <div class="extension-card">
+  <div class="extension-card" data-aos="fade-up">
     <img src="https://img.bloupla.net/wr4g6Pzs?raw=1" width="60">
     <div class="ext-title">엔트리-textMagic</div>
     <div class="ext-desc">간편한 텍스트 포맷팅 도구</div>
     <a class="ext-btn" href="https://chromewebstore.google.com/detail/faolcmnjnefhajpecldmohnohmpcgkao" target="_blank">바로가기</a>
   </div>
-
-  <div class="extension-card">
+  <div class="extension-card" data-aos="fade-up" data-aos-delay="100">
     <img src="https://lh3.googleusercontent.com/VyTP1yyNhSmpL_ieQc4pgwjQeun5_V3-038iBYh_r80gVScYhJ05Hoyrx5zNO3oenqaRpEPHXeMYudl6W51ZB6E2rQ=s120" width="60">
     <div class="ext-title">엔트리 작품 도우미</div>
     <div class="ext-desc">작품 제작 편의 기능 모음</div>
     <a class="ext-btn" href="https://chromewebstore.google.com/detail/jkmejnmbcagakflkcmlbgdcojbppooch" target="_blank">바로가기</a>
   </div>
-
-  <div class="extension-card">
+  <div class="extension-card" data-aos="fade-up" data-aos-delay="200">
     <img src="https://lh3.googleusercontent.com/pj6zxa1HOuzJDb1b40icl8j-oSjTEqK1mFbz7__nDd5Y2qNoiouvFWyKE4iT-4Gp2mbvPAfaD-CTzkcgDNjf1S0wLQ=s120" width="60">
     <div class="ext-title">엔트리 - 팔취 알림</div>
-    <div class="ext-desc">팔로우 취소(팔취) 유저를 감지해 알려줍니다.</div>
-    <a class="ext-btn" href="https://chromewebstore.google.com/detail/%EC%97%94%ED%8A%B8%EB%A6%AC-%ED%8C%94%EC%B7%A8-%EC%95%8C%EB%A6%BC/opojfnmbgoddolmgiliginikincpcind?authuser=0&hl=ko" target="_blank">바로가기</a>
+    <div class="ext-desc">팔로우 취소 유저 감지 알림</div>
+    <a class="ext-btn" href="https://chromewebstore.google.com/detail/%EC%97%94%ED%8A%B8%EB%A6%AC-%ED%8C%94%EC%B7%A8-%EC%95%8C%EB%A6%BC/opojfnmbgoddolmgiliginikincpcind" target="_blank">바로가기</a>
   </div>
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init({duration:800, once:true});</script>
-
 <script>
-/* UPDATE LIST */
+AOS.init({duration:800, once:true});
+
+let isFirstRender = true;
+
 const updates=[
   "[2025-12-23] 중고거래 검색, 대기열 사이트 추가",
-  "[2025-11-23] 플래시카드 사이트 자동완성 뜻 정확도 향상(네이버사전)",
-  "[2025-11-18] cloudflare 문제 관련 알림 팝업 추가",
+  "[2025-11-23] 플래시카드 자동완성 정확도 향상",
+  "[2025-11-18] cloudflare 관련 알림 팝업 추가",
   "[2025-11-18] 이미지 업로드 보안 및 UI 개선",
-  // "[2025-11-17] 꼬꼬마 웹 메인페이지 UI 대폭 개편",
-  // "[2025-10-19] 영어 플래시 카드 사이트 추가",
-  // "[2025-10-11] Video FPS Splitter UI 개선",
 ];
-updates.forEach(text=>{
+const updateList=document.getElementById("updateList");
+
+/* [수정] 업데이트 리스트에서 상위 3개만 추출하여 렌더링 */
+updates.slice(0, 3).forEach(text=>{
   const div=document.createElement("div");
   div.className="update-item";
   const match=text.match(/\[(.*?)\]\s*(.*)/);
-  div.innerHTML=`<div class='update-date'>${match[1]}</div><div class='update-desc'>${match[2]}</div>`;
-  document.getElementById("updateList").appendChild(div);
+  if(match) div.innerHTML=`<div class='update-date'>${match[1]}</div><div class='update-desc'>${match[2]}</div>`;
+  updateList.appendChild(div);
 });
 
-/* SITES */
 const sites=[
   { name:"꿈나무위키", desc:"초등학생들을 위한 위키", icon:"https://img.bloupla.net/dream-namu-wiki-icon?raw=1", url:"https://wiki.kkomaweb.com/", category:"study"},
-  { name:"중고거래 검색", desc:"판매중인 항목은 검색 결과가 없으면 근처에서 찾아줍니다.", icon:"https://playentry.org/uploads/d3/c1/d3c110b4ma9imlt80006a2c94373oyaj.png", url:"https://market-search.kkomaweb.com/", category:"tool"},
-  { name:"대기열 시스템", desc:"SMS가 가지 않지만 효과적으로 대기를 관리할 수 있습니다.", icon:"https://img.bloupla.net/ml6BZnKy?raw=1", url:"https://waiting.kkomaweb.com/", category:"tool"},
+  { name:"중고거래 검색", desc:"인근 지역 중고물품 검색 도구", icon:"https://playentry.org/uploads/d3/c1/d3c110b4ma9imlt80006a2c94373oyaj.png", url:"https://market-search.kkomaweb.com/", category:"tool"},
+  { name:"대기열 시스템", desc:"효과적인 대기열 관리 서비스", icon:"https://img.bloupla.net/ml6BZnKy?raw=1", url:"https://waiting.kkomaweb.com/", category:"tool"},
   { name:"영어 플래시 카드", desc:"자동완성 포함 학습 사이트", icon:"https://img.bloupla.net/flashcard-icon?raw=1", url:"https://card.kkomaweb.com/", category:"study"},
-  { name:"파일 용량 줄이기", desc:"이미지 압축", icon:"https://img.bloupla.net/9j1XSjUg?raw=1", url:"https://kkomaweb.com/filecompression", category:"tool"},
+  { name:"파일 용량 줄이기", desc:"이미지 압축 도구", icon:"https://img.bloupla.net/9j1XSjUg?raw=1", url:"https://kkomaweb.com/filecompression", category:"tool"},
+  { name:"이미지 업로드", desc:"간편 이미지 호스팅", icon:"https://playentry.org/uploads/d3/c1/d3c110b4ma9imlt80006a2c94373oyaj.png", url:"https://img.kkomaweb.com/", category:"tool"},
   { name:"Video FPS Splitter", desc:"영상 프레임 분리", icon:"https://playentry.org/uploads/d3/c1/d3c110b4ma9imlt80006a2c94373oyaj.png", url:"https://kkomaweb.com/fpsvideodivide", category:"tool"},
-  { name:"이미지 업로드", desc:"간편한 이미지 업로드", icon:"https://playentry.org/uploads/d3/c1/d3c110b4ma9imlt80006a2c94373oyaj.png", url:"https://img.kkomaweb.com/", category:"tool"},
   { name:"확장 프로그램", desc:"확장 프로그램 모음", icon:"https://playentry.org/uploads/d3/c1/d3c110b4ma9imlt80006a2c94373oyaj.png", url:"http://kkomaweb.com/extensions", category:"lab"}
 ];
 
 function renderSites(category="all"){
-  document.getElementById("siteList").innerHTML="";
-  sites.filter(s=>category==="all"||s.category===category)
-  .forEach(site=>{
-    document.getElementById("siteList").innerHTML+=`
-      <div class="site-card">
+  const list=document.getElementById("siteList");
+  list.innerHTML="";
+  const aosAttr = isFirstRender ? 'data-aos="zoom-in"' : '';
+  
+  sites.filter(s=>category==="all"||s.category===category).forEach(site=>{
+    list.innerHTML+=`
+      <div class="site-card" ${aosAttr}>
         <img class="site-logo" src="${site.icon}">
         <div class="site-infos">
-          <span class="site-name"><b>${site.name}</b></span><br>
-          <span class="site-desc">${site.desc}</span><br>
+          <b>${site.name}</b><br>
+          <span style="font-size:13px; color:#666;">${site.desc}</span><br>
           <a class="site-link" href="${site.url}" target="_blank">바로가기</a>
         </div>
       </div>`;
   });
 }
 renderSites();
+isFirstRender = false;
 
-/* TAB BUTTON */
 document.querySelectorAll(".tab-button").forEach(btn=>{
   btn.addEventListener("click",()=>{
     document.querySelector(".tab-button.active").classList.remove("active");
@@ -329,14 +324,57 @@ document.querySelectorAll(".tab-button").forEach(btn=>{
   });
 });
 
-/* MENU SCROLL */
 document.querySelectorAll(".nav-btn").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    document.getElementById(btn.dataset.target).scrollIntoView({behavior:"smooth"});
+    const target=document.getElementById(btn.dataset.target);
+    window.scrollTo({ top: target.offsetTop - 80, behavior: "smooth" });
   });
 });
 
-/* HERO ICONS SHOW */
+/* ================= 무한 슬라이더 + 점(Dot) 로직 ================= */
+let slideIndex = 0;
+const heroTrack = document.getElementById('heroTrack');
+const dots = document.querySelectorAll('.dot');
+let slideInterval;
+
+function updateDots(idx) {
+  dots.forEach(d => d.classList.remove('active'));
+  dots[idx % 2].classList.add('active');
+}
+
+function moveSlide(targetIdx = null) {
+  if (targetIdx !== null) {
+    slideIndex = targetIdx;
+  } else {
+    slideIndex++;
+  }
+  
+  heroTrack.style.transition = "transform 0.8s cubic-bezier(0.65, 0, 0.35, 1)";
+  heroTrack.style.transform = `translateX(-${slideIndex * 33.3333}%)`;
+  updateDots(slideIndex);
+
+  if (slideIndex === 2) {
+    setTimeout(() => {
+      heroTrack.style.transition = "none";
+      heroTrack.style.transform = "translateX(0)";
+      slideIndex = 0;
+    }, 800);
+  }
+}
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    clearInterval(slideInterval);
+    moveSlide(parseInt(dot.dataset.index));
+    startAutoSlide();
+  });
+});
+
+function startAutoSlide() {
+  slideInterval = setInterval(moveSlide, 5000);
+}
+startAutoSlide();
+
 window.addEventListener("load",()=>{
   setTimeout(()=>{
     document.querySelector(".hero-icons").classList.add("show");
@@ -344,73 +382,24 @@ window.addEventListener("load",()=>{
   },300);
 });
 
-/* ICON CLICK */
-document.querySelectorAll(".icon-card").forEach(card=>{
-  card.addEventListener("click",()=>{
-    const cat=card.dataset.category;
-    const btn=document.querySelector(`.tab-button[data-category="${cat}"]`);
+document.querySelectorAll(".icon-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const category = card.dataset.category;
     document.querySelector(".tab-button.active").classList.remove("active");
-    btn.classList.add("active");
-    renderSites(cat);
-    document.getElementById("sites").scrollIntoView({behavior:"smooth"});
+    const targetTab = document.querySelector(`.tab-button[data-category="${category}"]`);
+    if(targetTab) targetTab.classList.add("active");
+    renderSites(category);
+    const targetSection = document.getElementById("sites");
+    window.scrollTo({ top: targetSection.offsetTop - 80, behavior: "smooth" });
   });
 });
 
-/* TILT */
 const tiltCards=document.querySelectorAll(".tilt");
 document.addEventListener("mousemove",e=>{
   const x=(window.innerWidth/2-e.clientX)/40;
   const y=(window.innerHeight/2-e.clientY)/40;
   tiltCards.forEach(card=>card.style.transform=`rotateX(${y}deg) rotateY(${-x}deg)`);
 });
-
-/* ================= 팝업 JS ================= */
-function openNotice(message, type="info"){
-  const popup=document.getElementById("noticePopup");
-  const box=document.getElementById("noticeBox");
-  const icon=document.getElementById("noticeIcon");
-  const title=document.getElementById("noticeTitle");
-  const msg=document.getElementById("noticeMessage");
-
-  const types={
-    info:{ icon:"🛈", title:"알림" },
-    warning:{ icon:"⚠", title:"주의" },
-    danger:{ icon:"❗", title:"경고" }
-  };
-
-  msg.innerHTML=message;
-  icon.innerHTML=types[type].icon;
-  title.innerHTML=types[type].title;
-  box.className="notice-box " + type;
-
-  popup.style.display="flex";
-  setTimeout(()=>popup.classList.add("show"),10);
-}
-
-/* 닫기 버튼 */
-document.getElementById("btnClose").addEventListener("click",()=>{
-  const popup=document.getElementById("noticePopup");
-  popup.classList.remove("show");
-  popup.classList.add("hide");
-  setTimeout(()=>popup.style.display="none",350);
-});
-
-/* 오늘 하루 보지 않기 */
-document.getElementById("btnToday").addEventListener("click",()=>{
-  localStorage.setItem("hideToday", new Date().toDateString());
-  const popup=document.getElementById("noticePopup");
-  popup.classList.remove("show");
-  popup.classList.add("hide");
-  setTimeout(()=>popup.style.display="none",350);
-});
-
-/* 페이지 로드 후 자동 표시 */
-// window.addEventListener("load",()=>{
-//   if(localStorage.getItem("hideToday") !== new Date().toDateString()){
-//     setTimeout(()=>openNotice("현재 꿈나무위키 업데이트로 인하여<br>꿈나무위키 접속이 불가합니다","warning"),600);
-//   }
-// });
-
 </script>
 
 </body>
