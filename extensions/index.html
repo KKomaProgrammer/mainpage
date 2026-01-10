@@ -73,6 +73,11 @@ button {
 
 <script>
 const extensions = [
+  {name:"CodeMJ NO 마이컴파일러", desc:"CodeMJ에 에디터를 추가해 줍니다.",
+   img:"https://lh3.googleusercontent.com/lCsJbCDvpUs_VKL2wbzbcEp6uoTwuY8vrOQU9naVPxrR97A1OUe7iJQ0wq6tdVLv1rBNTGvlmKqmlo3ZQEmpU532=s192-rw",
+   store:null,
+   github:null
+  },
   {name:"매직 뷰(Magic View)", desc:"링크 바로가기 미리보기 제공",
    img:"https://lh3.googleusercontent.com/flskyaJEZeGLRCmMCfYibqciZ-sLVXO2WChh96vNekVxui5jYG4kPMu4QjpkR6Yq9rYmSmpaEjxDmuITHcdyMydf-w=s120",
    store:"https://chromewebstore.google.com/detail/%EB%A7%A4%EC%A7%81-%EB%B7%B0magic-view/gdnjbhahaolojpdfjjchedncgnmjdmla?authuser=0&hl=ko",
@@ -112,7 +117,9 @@ function renderExtensions() {
           <div class="desc">${ext.desc}</div>
         </div>
         <div class="buttons">
-          <button class="store" onclick="location.href='${ext.store}'">웹스토어</button>
+          ${ext.store
+            ? `<button class="store" onclick="location.href='${ext.store}'">웹스토어</button>`
+            : `<button class="store disabled" disabled>출시 에정</button>`}
           ${ext.github
             ? `<button class="github" onclick="location.href='${ext.github}'">GitHub</button>`
             : `<button class="github disabled" disabled>No GitHub</button>`}
