@@ -91,7 +91,7 @@
     h1, h2, h3, p { margin-top: 0; }
     h1, h2, h3 { line-height: 1.18; letter-spacing: -.035em; }
     .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
-    .section { padding: 118px 0; position: relative; }
+    .section { padding: 96px 0; position: relative; }
     .section-tight { padding-top: 18px; }
     .section-kicker {
       display: inline-flex;
@@ -105,7 +105,7 @@
       text-transform: uppercase;
     }
     .section-kicker::before { content: ""; width: 28px; height: 2px; background: currentColor; }
-    .section-heading { max-width: 760px; margin-bottom: 46px; }
+    .section-heading { max-width: 760px; margin-bottom: 36px; }
     .section-heading h2 { margin-bottom: 18px; font-size: clamp(2rem, 4.3vw, 4.1rem); }
     .section-heading p { max-width: 680px; margin-bottom: 0; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.15rem); }
     .eyebrow {
@@ -196,8 +196,13 @@
 
     .hero { min-height: 100svh; display: flex; align-items: center; padding: 138px 0 78px; position: relative; }
     .hero-grid { display: grid; grid-template-columns: minmax(0, 1.14fr) minmax(340px, .86fr); align-items: center; gap: clamp(48px, 8vw, 105px); }
-    .hero-copy h1 { max-width: 780px; margin: 26px 0 26px; font-size: clamp(3.25rem, 7.4vw, 7.25rem); font-weight: 900; line-height: .96; }
-    .hero-copy h1 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--muted); }
+    .hero-copy h1 { max-width: 780px; margin: 0 0 26px; font-size: clamp(3.25rem, 7.4vw, 7.25rem); font-weight: 900; line-height: .96; }
+    .hero-copy h1 .outline {
+      color: var(--bg);
+      -webkit-text-stroke: 2px var(--muted);
+      paint-order: stroke fill;
+      filter: drop-shadow(0 0 1px color-mix(in srgb, var(--muted) 40%, transparent));
+    }
     .hero-copy h1 .accent { color: var(--accent); }
     .hero-lead { max-width: 650px; margin-bottom: 34px; color: var(--muted); font-size: clamp(1.05rem, 1.8vw, 1.32rem); }
     .hero-lead strong { color: var(--text); }
@@ -301,8 +306,9 @@
     }
     .identity-card { display: flex; flex-direction: column; justify-content: space-between; min-height: 480px; padding: 34px; border-radius: var(--radius-xl); }
     .identity-card .big-index { color: var(--faint); font-family: monospace; font-size: .8rem; }
-    .identity-card blockquote { margin: 60px 0; font-size: clamp(1.55rem, 3vw, 2.65rem); font-weight: 850; line-height: 1.25; letter-spacing: -.045em; }
+    .identity-card blockquote { margin: 38px 0 24px; font-size: clamp(1.55rem, 3vw, 2.65rem); font-weight: 850; line-height: 1.25; letter-spacing: -.045em; }
     .identity-card blockquote span { color: var(--accent); }
+    .identity-skills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 30px; }
     .identity-bottom { display: flex; align-items: center; gap: 13px; color: var(--muted); font-size: .86rem; }
     .identity-bottom img { width: 42px; height: 42px; border-radius: 13px; }
     .manifesto-card { padding: clamp(30px, 5vw, 58px); border-radius: var(--radius-xl); }
@@ -315,11 +321,15 @@
     .principle p { margin-bottom: 0; color: var(--muted); font-size: .9rem; }
 
     .capability-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-    .capability-card { min-height: 315px; padding: 25px; border-radius: var(--radius-lg); transition: .25s ease; }
+    .capability-card { display: flex; flex-direction: column; min-height: 355px; padding: 25px; border-radius: var(--radius-lg); transition: .25s ease; }
     .capability-card:hover { transform: translateY(-8px); border-color: var(--line-strong); }
-    .cap-icon { display: grid; place-items: center; width: 50px; height: 50px; margin-bottom: 55px; border-radius: 15px; background: var(--panel-strong); color: var(--accent); font-size: 1.25rem; font-weight: 900; }
+    .cap-icon { display: grid; place-items: center; width: 50px; height: 50px; margin-bottom: 24px; border-radius: 15px; background: var(--panel-strong); color: var(--accent); font-size: 1.25rem; font-weight: 900; }
     .capability-card h3 { margin-bottom: 10px; font-size: 1.25rem; }
-    .capability-card p { margin-bottom: 18px; color: var(--muted); font-size: .88rem; }
+    .capability-card p { margin-bottom: 16px; color: var(--muted); font-size: .88rem; }
+    .cap-points { display: grid; gap: 7px; margin: 0 0 20px; padding: 0; list-style: none; color: var(--muted); font-size: .74rem; }
+    .cap-points li { display: flex; align-items: flex-start; gap: 8px; }
+    .cap-points li::before { content: "↳"; flex: 0 0 auto; color: var(--accent); font-weight: 900; }
+    .capability-card .mini-tags { margin-top: auto; }
     .mini-tags { display: flex; flex-wrap: wrap; gap: 7px; }
     .mini-tag { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--faint); font-size: .66rem; font-weight: 750; }
 
@@ -355,6 +365,36 @@
     .wiki-card { --project-bg: radial-gradient(circle at 24% 12%, rgba(184,243,107,.45), transparent 34%), linear-gradient(145deg, #173424, #0d1a13); }
     .market-card { --project-bg: radial-gradient(circle at 82% 4%, rgba(255,211,122,.75), transparent 34%), linear-gradient(145deg, #4e2c0f, #1c1810); }
     .queue-card { --project-bg: radial-gradient(circle at 72% 0%, rgba(85,217,157,.65), transparent 32%), linear-gradient(145deg, #12362b, #101b20); }
+    .project-snapshot {
+      position: absolute;
+      top: 106px;
+      right: 30px;
+      width: min(48%, 270px);
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.17);
+      border-radius: 16px;
+      background: rgba(3,10,6,.24);
+      backdrop-filter: blur(12px);
+      transform: rotate(-2deg);
+    }
+    .project-snapshot span { display: block; margin-bottom: 10px; color: rgba(255,255,255,.7); font-family: monospace; font-size: .62rem; font-weight: 800; letter-spacing: .08em; }
+    .snapshot-bars { display: grid; gap: 7px; }
+    .snapshot-bar { height: 7px; border-radius: 999px; background: rgba(255,255,255,.18); }
+    .snapshot-bar:nth-child(1) { width: 92%; background: color-mix(in srgb, var(--accent) 72%, transparent); }
+    .snapshot-bar:nth-child(2) { width: 68%; }
+    .snapshot-bar:nth-child(3) { width: 80%; }
+
+    .now-grid { display: grid; grid-template-columns: 1.15fr .85fr .85fr; gap: 15px; }
+    .now-card { position: relative; overflow: hidden; min-height: 330px; padding: 27px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--panel); }
+    .now-card.primary { background: linear-gradient(145deg, color-mix(in srgb, var(--panel-solid) 88%, var(--accent-3) 12%), var(--panel)); }
+    .now-card::after { content: ""; position: absolute; right: -48px; top: -48px; width: 145px; height: 145px; border: 1px solid var(--line-strong); border-radius: 50%; box-shadow: 0 0 0 30px var(--line); }
+    .now-card > * { position: relative; z-index: 1; }
+    .now-status { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 48px; color: var(--accent); font-family: monospace; font-size: .68rem; font-weight: 850; letter-spacing: .08em; }
+    .now-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 12%, transparent); }
+    .now-card h3 { margin-bottom: 12px; font-size: clamp(1.35rem, 2.5vw, 2.05rem); }
+    .now-card p { margin-bottom: 20px; color: var(--muted); font-size: .84rem; }
+    .now-points { display: grid; gap: 7px; margin: 0 0 23px; padding: 0; list-style: none; color: var(--muted); font-size: .73rem; }
+    .now-points li::before { content: "+ "; color: var(--accent); font-weight: 900; }
 
     .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: -18px 0 30px; }
     .filter-button { padding: 9px 15px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-size: .78rem; font-weight: 800; cursor: pointer; transition: .2s ease; }
@@ -385,12 +425,14 @@
     .extension-arrow:hover { border-color: var(--accent); background: var(--accent); color: #10200f; }
 
     .repo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .repo-card { display: flex; flex-direction: column; min-height: 235px; padding: 23px; border-radius: var(--radius-lg); text-decoration: none; transition: .24s ease; }
+    .repo-card { display: flex; flex-direction: column; min-height: 310px; padding: 23px; border-radius: var(--radius-lg); text-decoration: none; transition: .24s ease; }
     .repo-card:hover { transform: translateY(-6px); border-color: var(--accent); }
-    .repo-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; color: var(--faint); }
+    .repo-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 23px; color: var(--faint); }
     .repo-icon { font-family: monospace; font-size: 1rem; font-weight: 900; }
     .repo-card h3 { margin-bottom: 9px; font-size: 1.05rem; overflow-wrap: anywhere; }
-    .repo-card p { flex: 1; margin-bottom: 18px; color: var(--muted); font-size: .81rem; }
+    .repo-card p { margin-bottom: 14px; color: var(--muted); font-size: .81rem; }
+    .repo-points { display: grid; gap: 6px; flex: 1; margin: 0 0 18px; padding: 13px 0 0; border-top: 1px solid var(--line); list-style: none; color: var(--faint); font-size: .7rem; }
+    .repo-points li::before { content: "• "; color: var(--accent); }
     .repo-tech { color: var(--accent); font-family: monospace; font-size: .68rem; font-weight: 800; }
     .repo-more { margin-top: 26px; }
 
@@ -408,7 +450,7 @@
 
     .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: process; }
     .process-card { min-height: 285px; padding: 24px; border-radius: var(--radius-lg); counter-increment: process; }
-    .process-card::before { content: "0" counter(process); display: block; margin-bottom: 65px; color: var(--accent); font-family: monospace; font-size: .76rem; font-weight: 900; }
+    .process-card::before { content: "0" counter(process); display: block; margin-bottom: 30px; color: var(--accent); font-family: monospace; font-size: .76rem; font-weight: 900; }
     .process-card h3 { margin-bottom: 11px; font-size: 1.2rem; }
     .process-card p { margin-bottom: 0; color: var(--muted); font-size: .85rem; }
 
@@ -448,6 +490,8 @@
       .about-grid, .extension-showcase, .timeline-layout { grid-template-columns: 1fr; }
       .extension-intro, .timeline-aside { position: static; }
       .capability-grid, .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .now-grid { grid-template-columns: 1fr 1fr; }
+      .now-card.primary { grid-column: 1 / -1; }
       .services-grid, .repo-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
@@ -466,11 +510,14 @@
       .tag-two { left: -5px; }
       .identity-card { min-height: 390px; }
       .capability-grid, .services-grid, .repo-grid, .process-grid { grid-template-columns: 1fr; }
+      .now-grid { grid-template-columns: 1fr; }
+      .now-card.primary { grid-column: auto; }
       .numbers-grid { grid-template-columns: 1fr 1fr; gap: 20px 0; }
       .number-item:nth-child(2) { border-right: 0; }
       .project-card.large, .project-card.small { grid-column: 1 / -1; }
       .project-card { min-height: 410px; padding: 23px; }
       .project-content { inset: auto 23px 23px; }
+      .project-snapshot { top: 96px; right: 23px; width: min(56%, 230px); }
       .extension-item { grid-template-columns: auto 1fr; gap: 15px; }
       .extension-arrow { grid-column: 1 / -1; width: 100%; }
       .timeline-card { margin-left: 44px; }
@@ -535,7 +582,6 @@
     <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow"><span class="status-dot"></span>아이디어를 제품으로 만드는 중</span>
           <h1>작은 불편을<br><span class="outline">발견하고,</span><br><span class="accent">웹으로 풉니다.</span></h1>
           <p class="hero-lead"><strong>KKoma Programmer</strong>는 웹 서비스, 학습 도구, 브라우저 확장 프로그램을 직접 기획하고 구현합니다. 떠오른 아이디어가 실제 사용 가능한 경험이 될 때까지 만들고, 시험하고, 계속 개선합니다.</p>
           <div class="button-row">
@@ -595,6 +641,7 @@
           <article class="identity-card reveal">
             <span class="big-index">PROFILE / 01</span>
             <blockquote>“일단 만들어 보고,<br><span>더 나은 답</span>을 찾습니다.”</blockquote>
+            <div class="identity-skills"><span class="mini-tag">Web Service</span><span class="mini-tag">Extension</span><span class="mini-tag">EdTech</span><span class="mini-tag">Automation</span></div>
             <div class="identity-bottom">
               <img src="https://avatars.githubusercontent.com/u/193856806?v=4" alt="">
               <div><strong>KKoma Programmer</strong><br><span>Independent web maker</span></div>
@@ -630,10 +677,10 @@
           <p>목적에 맞는 구조를 고르고, 웹에서 바로 사용할 수 있는 결과물로 연결합니다.</p>
         </div>
         <div class="capability-grid">
-          <article class="capability-card reveal"><div class="cap-icon">W</div><h3>웹 서비스</h3><p>반응형 화면, 데이터 처리, 검색과 필터, 파일 변환처럼 실제 사용에 필요한 기능을 설계합니다.</p><div class="mini-tags"><span class="mini-tag">Responsive UI</span><span class="mini-tag">Web API</span></div></article>
-          <article class="capability-card reveal delay-1"><div class="cap-icon">E</div><h3>브라우저 확장</h3><p>기존 웹사이트의 반복 작업을 줄이고, 필요한 정보를 더 빠르게 확인할 수 있는 도구를 만듭니다.</p><div class="mini-tags"><span class="mini-tag">Chrome MV3</span><span class="mini-tag">Automation</span></div></article>
-          <article class="capability-card reveal delay-2"><div class="cap-icon">L</div><h3>학습 경험</h3><p>단어, 퀴즈, 위키와 같은 학습 콘텐츠를 부담 없이 반복할 수 있는 인터랙션으로 바꿉니다.</p><div class="mini-tags"><span class="mini-tag">EdTech</span><span class="mini-tag">Gamification</span></div></article>
-          <article class="capability-card reveal delay-3"><div class="cap-icon">R</div><h3>실험과 개선</h3><p>아이디어를 빠르게 프로토타입으로 검증하고 성능, 안정성, 사용성을 반복해서 개선합니다.</p><div class="mini-tags"><span class="mini-tag">Prototype</span><span class="mini-tag">Iteration</span></div></article>
+          <article class="capability-card reveal"><div class="cap-icon">W</div><h3>웹 서비스</h3><p>반응형 화면부터 데이터 처리까지 실제 사용에 필요한 기능을 설계합니다.</p><ul class="cap-points"><li>검색·필터·대시보드</li><li>파일 업로드와 변환</li><li>모바일 중심 인터페이스</li></ul><div class="mini-tags"><span class="mini-tag">Responsive UI</span><span class="mini-tag">Web API</span></div></article>
+          <article class="capability-card reveal delay-1"><div class="cap-icon">E</div><h3>브라우저 확장</h3><p>기존 웹사이트 위에 필요한 기능을 더해 반복 작업과 탐색 시간을 줄입니다.</p><ul class="cap-points"><li>페이지 구조 분석</li><li>작업 자동화와 상태 저장</li><li>안전한 백그라운드 처리</li></ul><div class="mini-tags"><span class="mini-tag">Chrome MV3</span><span class="mini-tag">Automation</span></div></article>
+          <article class="capability-card reveal delay-2"><div class="cap-icon">L</div><h3>학습 경험</h3><p>학습 콘텐츠를 부담 없이 반복할 수 있는 명확한 인터랙션으로 바꿉니다.</p><ul class="cap-points"><li>단어와 퀴즈 학습</li><li>진행도와 기록 저장</li><li>실행 가능한 코드 예제</li></ul><div class="mini-tags"><span class="mini-tag">EdTech</span><span class="mini-tag">Gamification</span></div></article>
+          <article class="capability-card reveal delay-3"><div class="cap-icon">R</div><h3>실험과 개선</h3><p>작동하는 프로토타입을 빠르게 검증하고 안정적인 제품으로 발전시킵니다.</p><ul class="cap-points"><li>핵심 기능 우선 구현</li><li>오류와 성능 측정</li><li>사용 흐름 반복 개선</li></ul><div class="mini-tags"><span class="mini-tag">Prototype</span><span class="mini-tag">Iteration</span></div></article>
         </div>
       </div>
     </section>
@@ -644,6 +691,39 @@
         <div class="number-item"><strong>08</strong><span>운영·소개 중인 웹 서비스</span></div>
         <div class="number-item"><strong>03</strong><span>대표 Chrome 확장 프로그램</span></div>
         <div class="number-item"><strong>∞</strong><span>계속 이어지는 실험과 개선</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="now">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="section-kicker">Recent Builds</span>
+          <h2>최근 집중해서 만든 작업</h2>
+          <p>최근 업데이트된 공개 저장소 가운데 기능의 완성도와 확장성이 잘 드러나는 프로젝트를 골랐습니다.</p>
+        </div>
+        <div class="now-grid">
+          <article class="now-card primary reveal">
+            <span class="now-status">RECENT · AI + EXTENSION</span>
+            <h3>Canva Design Score</h3>
+            <p>Canva 프레젠테이션의 슬라이드를 빠짐없이 수집하고, OpenAI 비전 모델로 디자인 완성도를 분석하는 Chrome 확장 프로그램입니다.</p>
+            <ul class="now-points"><li>지연 로딩 슬라이드까지 자동 탐색</li><li>Cloudflare Pages API와 안전한 키 분리</li><li>분석 기록·휴지통·SVG 결과 제공</li></ul>
+            <a class="text-link" href="https://github.com/KKomaProgrammer/canva-design-score" target="_blank" rel="noopener noreferrer">저장소 보기 <span class="arrow">↗</span></a>
+          </article>
+          <article class="now-card reveal delay-1">
+            <span class="now-status">RECENT · LEARNING</span>
+            <h3>Phaser Step Lab</h3>
+            <p>Phaser를 단계별로 배우고 Monaco Editor에서 코드를 직접 수정·실행하는 강좌 사이트입니다.</p>
+            <ul class="now-points"><li>단계별 강좌와 검색</li><li>진행도 저장과 코드 복원</li><li>모바일·전체화면 미리보기</li></ul>
+            <a class="text-link" href="https://github.com/KKomaProgrammer/study-phaser" target="_blank" rel="noopener noreferrer">저장소 보기 <span class="arrow">↗</span></a>
+          </article>
+          <article class="now-card reveal delay-2">
+            <span class="now-status">RECENT · COLLABORATION</span>
+            <h3>BoardLab Studio</h3>
+            <p>보드게임부 활동을 위해 영상, 발표 자료, 카드와 말판을 팀으로 제작하는 협업형 웹 서비스입니다.</p>
+            <ul class="now-points"><li>팀원 초대와 권한 관리</li><li>AI 제작 보조 기능</li><li>공유 링크와 결과물 출력</li></ul>
+            <a class="text-link" href="https://github.com/KKomaProgrammer/boardgamereport" target="_blank" rel="noopener noreferrer">저장소 보기 <span class="arrow">↗</span></a>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -658,21 +738,25 @@
         <div class="featured-grid">
           <article class="project-card large flash-card reveal">
             <div class="project-top"><span class="project-index">PROJECT 01</span><img class="project-logo" src="https://img.bloupla.net/flashcard-icon?raw=1" alt="영어 플래시 카드 아이콘"></div>
+            <div class="project-snapshot" aria-hidden="true"><span>AUTO COMPLETE / STUDY FLOW</span><div class="snapshot-bars"><i class="snapshot-bar"></i><i class="snapshot-bar"></i><i class="snapshot-bar"></i></div></div>
             <div class="project-content"><span class="project-type">Learning Product</span><h3>영어 플래시 카드</h3><p>단어 자동완성과 반복 학습 흐름을 결합한 영어 학습 서비스입니다. 입력 과정은 줄이고, 학습에 더 오래 집중할 수 있도록 설계했습니다.</p><div class="project-links"><a class="project-link" href="https://card.kkomaweb.com/" target="_blank" rel="noopener noreferrer">서비스 열기 ↗</a><a class="project-link" href="https://github.com/KKomaProgrammer/flashcards-vercel" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div>
           </article>
 
           <article class="project-card small wiki-card reveal delay-1">
             <div class="project-top"><span class="project-index">PROJECT 02</span><img class="project-logo" src="https://img.bloupla.net/dream-namu-wiki-icon?raw=1" alt="꿈나무위키 아이콘"></div>
+            <div class="project-snapshot" aria-hidden="true"><span>KID-FRIENDLY KNOWLEDGE</span><div class="snapshot-bars"><i class="snapshot-bar"></i><i class="snapshot-bar"></i><i class="snapshot-bar"></i></div></div>
             <div class="project-content"><span class="project-type">Knowledge Platform</span><h3>꿈나무위키</h3><p>초등학생도 편하게 정보를 찾고 읽을 수 있도록 만든 어린이 중심 위키 서비스입니다.</p><div class="project-links"><a class="project-link" href="https://wiki.kkomaweb.com/" target="_blank" rel="noopener noreferrer">서비스 열기 ↗</a></div></div>
           </article>
 
           <article class="project-card small market-card reveal">
             <div class="project-top"><span class="project-index">PROJECT 03</span><img class="project-logo" src="https://playentry.org/uploads/d3/c1/d3c110b4ma9imlt80006a2c94373oyaj.png" alt="꼬꼬마 웹 로고"></div>
+            <div class="project-snapshot" aria-hidden="true"><span>LOCAL SEARCH / QUICK FILTER</span><div class="snapshot-bars"><i class="snapshot-bar"></i><i class="snapshot-bar"></i><i class="snapshot-bar"></i></div></div>
             <div class="project-content"><span class="project-type">Search Tool</span><h3>중고거래 검색</h3><p>인근 지역의 중고 물품을 더 효율적으로 탐색할 수 있도록 검색 과정을 정리한 생활 도구입니다.</p><div class="project-links"><a class="project-link" href="https://market-search.kkomaweb.com/" target="_blank" rel="noopener noreferrer">서비스 열기 ↗</a></div></div>
           </article>
 
           <article class="project-card large queue-card reveal delay-1">
             <div class="project-top"><span class="project-index">PROJECT 04</span><img class="project-logo" src="https://img.bloupla.net/ml6BZnKy?raw=1" alt="대기열 시스템 아이콘"></div>
+            <div class="project-snapshot" aria-hidden="true"><span>LIVE STATUS / QUEUE CONTROL</span><div class="snapshot-bars"><i class="snapshot-bar"></i><i class="snapshot-bar"></i><i class="snapshot-bar"></i></div></div>
             <div class="project-content"><span class="project-type">Utility Service</span><h3>대기열 시스템</h3><p>순서와 현재 진행 상태를 명확히 보여 주어 대기 과정의 혼란을 줄이는 관리 서비스입니다. 단순한 화면 안에서 필요한 상태를 빠르게 파악하도록 구성했습니다.</p><div class="project-links"><a class="project-link" href="https://waiting.kkomaweb.com/" target="_blank" rel="noopener noreferrer">서비스 열기 ↗</a></div></div>
           </article>
         </div>
@@ -728,16 +812,16 @@
       <div class="container">
         <div class="section-heading reveal">
           <span class="section-kicker">Open Source Shelf</span>
-          <h2>GitHub에서 이어지는 실험</h2>
-          <p>완성된 서비스뿐 아니라 게임, 학습, 엔트리 도구, 자동화 아이디어를 저장소에서 계속 확장하고 있습니다.</p>
+          <h2>최근성과 완성도를 함께 본 저장소</h2>
+          <p>최근 업데이트된 공개 작업을 우선하되, 문제 해결 과정과 구현 범위를 포트폴리오에서 설명할 만한 프로젝트로 구성했습니다.</p>
         </div>
         <div class="repo-grid">
-          <a class="repo-card reveal" href="https://github.com/KKomaProgrammer/rhythm_game" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>↗</span></div><h3>rhythm_game</h3><p>음악과 타이밍 기반 인터랙션을 실험한 웹 리듬 게임 프로젝트.</p><span class="repo-tech">GAME · INTERACTION</span></a>
-          <a class="repo-card reveal delay-1" href="https://github.com/KKomaProgrammer/entry-project-finder" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>↗</span></div><h3>entry-project-finder</h3><p>엔트리 프로젝트를 탐색하고 필요한 정보를 찾는 과정을 돕는 도구.</p><span class="repo-tech">ENTRY · SEARCH</span></a>
-          <a class="repo-card reveal delay-2" href="https://github.com/KKomaProgrammer/canva-design-score" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>↗</span></div><h3>canva-design-score</h3><p>Canva 디자인을 분석하고 피드백하는 브라우저 확장 프로젝트.</p><span class="repo-tech">EXTENSION · DESIGN</span></a>
-          <a class="repo-card reveal" href="https://github.com/KKomaProgrammer/voca-study" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>↗</span></div><h3>voca-study</h3><p>단어 학습을 더 지속하기 쉬운 흐름으로 만드는 학습 웹 프로젝트.</p><span class="repo-tech">EDTECH · WEB</span></a>
-          <a class="repo-card reveal delay-1" href="https://github.com/KKomaProgrammer/boardgamereport" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>↗</span></div><h3>boardgamereport</h3><p>보드게임 경험과 정보를 정리해 보여 주는 리포트형 웹 프로젝트.</p><span class="repo-tech">REPORT · UI</span></a>
-          <a class="repo-card reveal delay-2" href="https://github.com/KKomaProgrammer/extension-direct-add" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>↗</span></div><h3>extension-direct-add</h3><p>브라우저 확장 프로그램 설치와 관리 흐름을 연구한 실험 프로젝트.</p><span class="repo-tech">CHROME · TOOLING</span></a>
+          <a class="repo-card reveal" href="https://github.com/KKomaProgrammer/canva-design-score" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>RECENT ↗</span></div><h3>canva-design-score</h3><p>Canva 슬라이드를 수집하고 비전 모델로 디자인 완성도를 평가하는 확장 프로그램.</p><ul class="repo-points"><li>Chrome MV3 확장 구조</li><li>OpenAI Responses API 연동</li><li>지연 로딩·CSP 예외 처리</li></ul><span class="repo-tech">AI · EXTENSION · CLOUDFLARE</span></a>
+          <a class="repo-card reveal delay-1" href="https://github.com/KKomaProgrammer/study-phaser" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>RECENT ↗</span></div><h3>study-phaser</h3><p>Phaser 강좌와 Monaco Editor, 실행 미리보기를 결합한 학습 사이트.</p><ul class="repo-points"><li>단계별 강좌·검색</li><li>코드 수정·복사·복원</li><li>진행도와 테마 저장</li></ul><span class="repo-tech">PHASER · MONACO · EDTECH</span></a>
+          <a class="repo-card reveal delay-2" href="https://github.com/KKomaProgrammer/boardgamereport" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>RECENT ↗</span></div><h3>boardgamereport</h3><p>보드게임 제작과 활동 발표를 팀 단위로 진행하는 BoardLab Studio.</p><ul class="repo-points"><li>프로젝트·팀원 권한 관리</li><li>영상·PPT·게임 구성 제작</li><li>Supabase와 AI 보조 기능</li></ul><span class="repo-tech">COLLAB · SUPABASE · AI</span></a>
+          <a class="repo-card reveal" href="https://github.com/KKomaProgrammer/voca-study" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>RECENT ↗</span></div><h3>voca-study</h3><p>단어 학습을 반복하기 쉬운 흐름으로 구성한 최근 학습 웹 프로젝트.</p><ul class="repo-points"><li>학습 상태와 데이터 처리</li><li>모바일 중심 사용 흐름</li><li>반복 학습 인터랙션</li></ul><span class="repo-tech">VOCABULARY · LEARNING · WEB</span></a>
+          <a class="repo-card reveal delay-1" href="https://github.com/KKomaProgrammer/extension-direct-add" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>RECENT ↗</span></div><h3>extension-direct-add</h3><p>페이지의 ZIP·GitHub 링크를 감지해 확장 프로그램 파일 확보를 돕는 Chrome MV3 도구.</p><ul class="repo-points"><li>ZIP·저장소 링크 감지</li><li>사용자 동작 기반 다운로드</li><li>팝업·콘텐츠·백그라운드 분리</li></ul><span class="repo-tech">CHROME MV3 · TOOLING</span></a>
+          <a class="repo-card reveal delay-2" href="https://github.com/KKomaProgrammer/mainpage" target="_blank" rel="noopener noreferrer"><div class="repo-top"><span class="repo-icon">&lt;/&gt;</span><span>UPDATED ↗</span></div><h3>mainpage</h3><p>꼬꼬마 웹의 서비스와 확장 프로그램, 프로젝트 기록을 한곳에 모은 브랜드 허브.</p><ul class="repo-points"><li>반응형 포트폴리오</li><li>서비스 디렉터리와 필터</li><li>다크·라이트 테마</li></ul><span class="repo-tech">PORTFOLIO · UI · JAVASCRIPT</span></a>
         </div>
         <div class="repo-more reveal"><a class="btn btn-secondary btn-small" href="https://github.com/KKomaProgrammer?tab=repositories" target="_blank" rel="noopener noreferrer">54개 공개 저장소 더 보기 <span class="arrow">↗</span></a></div>
       </div>
